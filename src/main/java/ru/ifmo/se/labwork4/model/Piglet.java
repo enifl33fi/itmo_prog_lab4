@@ -12,11 +12,13 @@ public class Piglet extends Animal implements EmotionalSpeaker, AbleToLookSomewh
         super(name);
     }
 
+
     @Override
-    public void put(FillableSpace fillableSpace, Entity whatToPut){
+    public void put(FillableSpace fillableSpace, Entity whatToPut) {
         System.out.printf("%s положил %s в %s%n", this.getName(), whatToPut.getName(), fillableSpace.toString());
         fillableSpace.fill(whatToPut);
     }
+
     @Override
     public void say(String phrase, StatusOfSpeaker status) {
         System.out.printf("%s %s: \"%s\"%n", this.getName(), status.toString(), phrase);
@@ -44,18 +46,19 @@ public class Piglet extends Animal implements EmotionalSpeaker, AbleToLookSomewh
     }
 
     @Override
-    public void understand(Information information){
+    public void understand(Information information) {
         System.out.printf("%s понял, ", this.getName());
         class Brain implements InformationProcessor {
             @Override
-            public void process(Information information){
+            public void process(Information information) {
                 if (information.isCorrectCheck()) {
                     System.out.printf("что %s правда%n", information.getText());
                 } else {
                     System.out.printf("что %s неправда%n", information.getText());
                 }
             }
-            public void pushIdea(){
+
+            public void pushIdea() {
                 process(information);
             }
         }

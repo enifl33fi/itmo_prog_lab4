@@ -1,16 +1,18 @@
 package ru.ifmo.se.labwork4;
 
-import ru.ifmo.se.labwork4.basic.Animal;
+
 import ru.ifmo.se.labwork4.basic.Entity;
-import ru.ifmo.se.labwork4.basic.Head;
-import ru.ifmo.se.labwork4.basic.Leg;
 import ru.ifmo.se.labwork4.exception.NatureException;
 import ru.ifmo.se.labwork4.model.*;
 import ru.ifmo.se.labwork4.status.StatusOfOpinion;
 import ru.ifmo.se.labwork4.status.StatusOfSpeaker;
 import ru.ifmo.se.labwork4.status.StatusOfSpeed;
 
+import java.util.Arrays;
+
 public class Main {
+    private static int cat;
+
     public static void main(String[] args) {
         //Creating objects
         var pirateLeg = new PirateLeg("leg");
@@ -20,12 +22,10 @@ public class Main {
         var homeP = new HomeP("Дом Пяточка");
         try {
             var winnieThePooh = new WinnieThePooh("Винни", "Пух", pirateLeg);
+        } catch (NatureException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            System.out.println("Зачем же уродовать Винни Пуха?\n");
         }
-        catch (NatureException e){
-            e.printStackTrace();
-            System.out.println("Зачем же уродовать Винни Пуха?");
-        }
-
         var winnieThePooh = new WinnieThePooh("Винни", "Пух", new Muzzle("мордочка"));
         var piglet = new Piglet("Пятачок");
         var honey = new Honey("мёд");
@@ -36,6 +36,7 @@ public class Main {
         var trickyPiglet = new Statement("если они будут класть в ловушку желуди, то желуди придется собирать ему, Пятачку, а если они положат туда мед, то его достанет Пух", true);
         //Setting the scene
         pot.fill(honey);
+        pot.fill(chair);
         veryDeepHole.fill(piglet);
         homeW.getShelf().fill(pot);
         //Action

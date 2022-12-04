@@ -3,6 +3,8 @@ package ru.ifmo.se.labwork4.basic;
 import ru.ifmo.se.labwork4.exception.StillFullException;
 import ru.ifmo.se.labwork4.status.StatusOfFullness;
 
+import java.util.Arrays;
+
 public abstract class FillableItem extends Item implements FillableSpace {
     private StatusOfFullness fullness;
     private Entity containedObject;
@@ -37,8 +39,10 @@ public abstract class FillableItem extends Item implements FillableSpace {
             try {
                 throw new StillFullException("Нет места");
             } catch (StillFullException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
+                System.out.println(Arrays.toString(e.getStackTrace()));
+                System.out.println(e.getMessage() + "\n");
+            } finally {
+                this.containedObject = null;
             }
         }
         this.containedObject = containedObject;
